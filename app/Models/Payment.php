@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Database\Factories\PaymentFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -16,6 +18,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Payment extends Model
 {
+    use HasFactory;
+
     protected $table = 'payments';
 
     protected $fillable = [
@@ -37,5 +41,10 @@ class Payment extends Model
     public function order()
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public static function newFactory()
+    {
+        return PaymentFactory::new();
     }
 }

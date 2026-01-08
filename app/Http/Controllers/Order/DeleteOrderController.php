@@ -26,6 +26,6 @@ class DeleteOrderController extends Controller
 
         $this->orderService->delete($orderId);
 
-        return APIResponse::success(['message' => 'Order deleted successfully.'], 200);
+        return APIResponse::success([], 'Order deleted successfully', 200);
     }
 }

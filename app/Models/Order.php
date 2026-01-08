@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\OrderStatus;
+use Database\Factories\OrderFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -15,6 +17,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Order extends Model
 {
+    use HasFactory;
+
     protected $table = 'orders';
 
     protected $fillable = [
@@ -38,5 +42,10 @@ class Order extends Model
     public function payment()
     {
         return $this->hasOne(Payment::class);
+    }
+
+    public static function newFactory()
+    {
+        return OrderFactory::new();
     }
 }
