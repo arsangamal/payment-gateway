@@ -23,7 +23,7 @@ class CreateOrderController extends Controller
     {
         $data = $request->validated();
 
-        $order = $this->orderService->createOrder($data);
+        $order = $this->orderService->create($data);
 
         return APIResponse::success($order, 'Order created successfully', 201);
     }

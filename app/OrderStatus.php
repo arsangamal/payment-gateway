@@ -6,7 +6,7 @@ enum OrderStatus: string
 {
     case PENDING = 'pending';
     case CONFIRMED = 'confirmed';
-    case CANCELED = 'canceled';
+    case CANCELLED = 'cancelled';
 
     public static function default(): self
     {

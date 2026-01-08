@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Interfaces\IOrderRepository;
 use App\Models\Order;
 use App\OrderStatus;
+use App\PaymentStatus;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class OrderService
@@ -25,7 +26,7 @@ class OrderService
         return $this->IOrderRepository->find($id);
     }
 
-    public function createOrder(array $data): Order|null
+    public function create(array $data): Order|null
     {
         $total = 0;
         foreach ($data['items'] as &$item) {
@@ -37,7 +38,14 @@ class OrderService
         $data['user_id'] = auth('api')->id();
         $data['status'] = OrderStatus::default()->value;
 
-        return $this->IOrderRepository->create($data);
+        $order = $this->IOrderRepository->create($data);
+
+        $order->payment()->create([
+            'status' => PaymentStatus::PENDING->value,
+            'user_id' => auth('api')->id(),
+        ]);
+
+        return $order;
     }
 
     public function update(int $id, array $data): Order|null
@@ -51,11 +59,25 @@ class OrderService
         $data['total'] = $total;
         $data['user_id'] = auth('api')->id();
 
-        return $this->IOrderRepository->update($id, $data);
+        $order = $this->IOrderRepository->update($id, $data);
+
+        return $order;
     }
 
     public function delete(int $id): bool
     {
         return $this->IOrderRepository->delete($id);
+    }
+
+    public function confirmOrder(int $id): Order|null
+    {
+        $order = $this->IOrderRepository->find($id);
+
+        if ($order) {
+            $order->status = OrderStatus::CONFIRMED->value;
+            $order->save();
+        }
+
+        return $order;
     }
 }
