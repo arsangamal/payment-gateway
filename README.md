@@ -38,7 +38,7 @@ The application follows Laravel best practices with:
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/arsangamal/payment-gateway
    cd payment-gateway-task
    ```
 
