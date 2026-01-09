@@ -16,6 +16,9 @@ class ReadPaymentControllerTest extends TestCase
 
     public function test_read_payment()
     {
+        /**
+         * @var User $user
+         */
         $user = User::factory()->create();
         $order = Order::factory()->create([
             'user_id' => $user->id,

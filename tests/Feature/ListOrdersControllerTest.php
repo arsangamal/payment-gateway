@@ -15,6 +15,9 @@ class ListOrdersControllerTest extends TestCase
 
     public function test_list_orders()
     {
+        /**
+         * @var User $user
+         */
         $user = User::factory()->create();
 
         Order::factory()->count(3)->create([

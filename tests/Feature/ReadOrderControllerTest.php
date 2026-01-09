@@ -15,6 +15,9 @@ class ReadOrderControllerTest extends TestCase
 
     public function test_read_order()
     {
+        /**
+         * @var User $user
+         */
         $user = User::factory()->create();
         $order = Order::factory()->create([
             'user_id' => $user->id,

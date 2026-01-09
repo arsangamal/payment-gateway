@@ -16,6 +16,9 @@ class DeleteOrderControllerTest extends TestCase
 
     public function test_delete_order()
     {
+        /**
+         * @var User $user
+         */
         $user = User::factory()->create();
 
         $order = Order::factory()->create([
@@ -48,6 +51,9 @@ class DeleteOrderControllerTest extends TestCase
 
     public function test_cant_delete_non_existent_order()
     {
+        /**
+         * @var User $user
+         */
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->deleteJson("/api/orders/999");
@@ -58,6 +64,9 @@ class DeleteOrderControllerTest extends TestCase
 
     public function test_cant_delete_paid_order()
     {
+        /**
+         * @var User $user
+         */
         $user = User::factory()->create();
 
         $order = Order::factory()->create([

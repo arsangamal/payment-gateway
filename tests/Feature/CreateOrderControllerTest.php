@@ -64,7 +64,11 @@ class CreateOrderControllerTest extends TestCase
 
     }
 
-    public function test_create_order_without_items(){
+    public function test_create_order_without_items()
+    {
+        /**
+         * @var User $user
+         */
         $user = User::factory()->createOne();
 
         $response = $this->actingAs($user)->postJson('/api/orders', [

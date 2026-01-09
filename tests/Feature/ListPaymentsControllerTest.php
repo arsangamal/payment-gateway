@@ -15,9 +15,10 @@ class ListPaymentsControllerTest extends TestCase
 
     public function test_list_payments()
     {
+        /**
+         * @var User $user
+         */
         $user = User::factory()->create();
-
-
 
         Payment::factory()->count(3)->create();
 
